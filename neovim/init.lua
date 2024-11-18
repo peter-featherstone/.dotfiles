@@ -26,6 +26,12 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Spaces over TABS
+vim.opt.tabstop = 4 -- A TAB character looks like 4 spaces
+vim.opt.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
+vim.opt.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
+vim.opt.shiftwidth = 4 -- Number of spaces inserted when indenting
+
 -- [[ Install `vim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -35,24 +41,32 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
-require("lazy").setup(
--- Oil provides nice file management when opening vim in a folder.
-{
-  'stevearc/oil.nvim',
-  opts = {},
-  dependencies = { { "echasnovski/mini.icons", opts = {} } },
-},
--- Treesitter adds nice colour highlight and formatting for programming languages
-{
-  "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate",
-  config = function () 
-    configs.setup({
-      ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "python", "css", "sql", "javascript", "html" },
-      sync_install = false,
-      highlight = { enable = true },
-      indent = { enable = true },  
-    })
-  end
-}
-)
+require("lazy").setup({
+    -- Add our base theme, this is our most important thing of course.
+    {
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+    },
+    -- Oil provides nice file management when opening vim in a folder.
+    {
+        "stevearc/oil.nvim",
+        opts = {},
+        dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    },
+    -- Treesitter adds nice colour highlight and formatting for programming languages
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        config = function () 
+            local configs = require("nvim-treesitter.configs")
+            configs.setup({
+                ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "python", "css", "sql", "javascript", "html" },
+                sync_install = false,
+                highlight = { enable = true },
+                indent = { enable = true },  
+            })
+        end
+    }
+})
