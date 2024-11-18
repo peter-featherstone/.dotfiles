@@ -21,25 +21,25 @@ config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
 config.window_frame = {
-    active_titlebar_bg = '#000a1f',
-    inactive_titlebar_bg = '#000a1f',
+  active_titlebar_bg = '#24283c',
+  inactive_titlebar_bg = '#24283c',
 }
 
 config.colors = {
-    tab_bar = {
-      background = '#000a1f',
-      inactive_tab_edge = '#000a1f',
-      active_tab = {
-        bg_color = '#000a1f',
-        fg_color = '#fff',
-      },
-  
-      inactive_tab = {
-        bg_color = '#000a1f',
-        fg_color = '#fff',
-      },
+  tab_bar = {
+    background = '#24283c',
+    inactive_tab_edge = '#24283c',
+    active_tab = {
+      bg_color = '#24283c',
+      fg_color = '#fff',
     },
-  }
+
+    inactive_tab = {
+      bg_color = '#24283c',
+      fg_color = '#fff',
+    },
+  },
+}
 
 -- and finally, return the configuration to wezterm
 return config
