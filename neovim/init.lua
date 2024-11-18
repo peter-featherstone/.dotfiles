@@ -35,6 +35,13 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
-require("lazy").setup()
+require("lazy").setup(
+-- Oil provides nice file management when opening vim in a folder.
+{
+  'stevearc/oil.nvim',
+  opts = {},
+  dependencies = { { "echasnovski/mini.icons", opts = {} } },
+}
+)
 
 -- vim: ts=2 sts=2 sw=2 et
