@@ -65,7 +65,7 @@ require("lazy").setup({
     },
     -- Add some more specific formatting options
     {
-        'stevearc/conform.nvim',
+        "stevearc/conform.nvim",
         opts = {
             formatters_by_ft = {
                 lua = { "stylua" },
@@ -76,6 +76,10 @@ require("lazy").setup({
                 lsp_format = "fallback",
             },
         },
+    },
+    {
+        "nvim-telescope/telescope.nvim", 
+        dependencies = { "nvim-lua/plenary.nvim" }
     },
     -- Set tabs and spaces per file type automatically.
     "tpope/vim-sleuth",
