@@ -9,7 +9,7 @@ local config = wezterm.config_builder()
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
-config.color_scheme = 'Ef-Deuteranopia-Dark'
+config.color_scheme = 'Tokyo Night Storm'
 config.font = wezterm.font 'CaskaydiaCove NF'
 config.max_fps = 120
 config.font_size = 16
