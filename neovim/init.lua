@@ -62,7 +62,24 @@ require("lazy").setup({
                 indent = { enable = true },  
             })
         end
-    }
+    },
+    -- Add some more specific formatting options
+    {
+        'stevearc/conform.nvim',
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                python = { "isort", "black" },
+            },
+            format_on_save = {
+                timeout_ms = 500,
+                lsp_format = "fallback",
+            },
+        },
+    },
     -- Set tabs and spaces per file type automatically.
-    'tpope/vim-sleuth', 
+    "tpope/vim-sleuth",
+
+
 })
+
