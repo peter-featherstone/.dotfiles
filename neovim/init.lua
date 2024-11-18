@@ -41,7 +41,18 @@ require("lazy").setup(
   'stevearc/oil.nvim',
   opts = {},
   dependencies = { { "echasnovski/mini.icons", opts = {} } },
+},
+-- Treesitter adds nice colour highlight and formatting for programming languages
+{
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+  config = function () 
+    configs.setup({
+      ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "python", "css", "sql", "javascript", "html" },
+      sync_install = false,
+      highlight = { enable = true },
+      indent = { enable = true },  
+    })
+  end
 }
 )
-
--- vim: ts=2 sts=2 sw=2 et
