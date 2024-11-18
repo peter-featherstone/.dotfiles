@@ -10,7 +10,6 @@ $username\
 $directory\
 [](fg:#DA627D bg:#FCA17D)\
 $git_branch\
-$git_status\
 [](fg:#FCA17D bg:#86BBD8)\
 $c\
 $golang\
@@ -24,8 +23,6 @@ $memory_usage\
 [ ](fg:#33658A)\
 """
 
-# You can also replace your username with a neat symbol like   or disable this
-# and use the os module below
 [username]
 show_always = true
 style_user = "bg:#9A348E"
@@ -47,26 +44,22 @@ style = 'bg:#33658A'
 format = '[$ram_pct ]($style)'
 
 [directory]
-style = "bg:#DA627D"
+style = "bg:#DA627D fg:black"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
-[c]
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+[git_branch]
+style = "bg:#FCA17D fg:black"
+format = '[ $symbol $branch ]($style)'
 
 [docker_context]
 style = "bg:#06969A"
 format = '[ $symbol $context ]($style)'
 
-[git_branch]
-style = "bg:#FCA17D"
-format = '[ $symbol $branch ]($style)'
-
-[git_status]
-style = "bg:#FCA17D"
-format = '[$all_status$ahead_behind ]($style)'
+[c]
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
 
 [golang]
 style = "bg:#86BBD8"
