@@ -90,6 +90,24 @@ require("lazy").setup({
             vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by [G]rep' })
         end
     },
+    -- Harpoon allows easier quick file switching within a project
+    {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            local harpoon = require 'harpoon'
+            harpoon:setup()
+
+            -- All harpoon commands are prefixed with h
+            vim.keymap.set("n", "<leader>ho", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+            vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end)
+            vim.keymap.set("n", "<leader>h1", function() harpoon:list():select(1) end)
+            vim.keymap.set("n", "<leader>h2", function() harpoon:list():select(2) end)
+            vim.keymap.set("n", "<leader>h3", function() harpoon:list():select(3) end)
+            vim.keymap.set("n", "<leader>h4", function() harpoon:list():select(4) end)
+        end
+    },
     -- Set tabs and spaces per file type automatically.
     "tpope/vim-sleuth",
 })
