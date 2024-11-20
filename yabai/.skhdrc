@@ -10,9 +10,6 @@ shift + alt - j : yabai -m window --swap south
 shift + alt - k : yabai -m window --swap north
 shift + alt - l : yabai -m window --swap east
 
-# balance size of windows
-shift + alt - 0 : yabai -m space --balance
-
 # send window to desktop and follow focus
 ctrl + cmd - 1 : yabai -m window --space 1 && yabai -m window --focus 1 
 ctrl + cmd - 2 : yabai -m window --space 2 && yabai -m window --focus 2 
@@ -23,7 +20,6 @@ ctrl + cmd - 6 : yabai -m window --space 6 && yabai -m window --focus 6
 ctrl + cmd - 7 : yabai -m window --space 7 && yabai -m window --focus 7 
 ctrl + cmd - 8 : yabai -m window --space 8 && yabai -m window --focus 8 
 ctrl + cmd - 9 : yabai -m window --space 9 && yabai -m window --focus 9 
-ctrl + cmd - 0 : yabai -m window --space 0 && yabai -m window --focus 0 
 
 # toggle window split type
 alt - e : yabai -m window --toggle split

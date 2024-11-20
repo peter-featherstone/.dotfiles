@@ -194,7 +194,11 @@ require("lazy").setup({
 	-- Oil provides nice file management when opening vim in a folder.
 	{
 		"stevearc/oil.nvim",
-		opts = {},
+		opts = {
+			view_options = {
+				show_hidden = true,
+			},
+		},
 		dependencies = { { "echasnovski/mini.icons", opts = {} } },
 	},
 	-- Treesitter adds nice colour highlight and formatting for programming languages

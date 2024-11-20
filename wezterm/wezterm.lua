@@ -2,11 +2,18 @@
 
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- This is where you actually apply your config choices
+config.keys = {
+	{
+		key = "f",
+		mods = "CMD",
+		action = wezterm.action.SendKey({ key = "N", mods = "CTRL" }),
+	},
+}
 
 -- For example, changing the color scheme:
 config.color_scheme = "Tokyo Night Storm"
@@ -46,6 +53,8 @@ config.colors = {
 		},
 	},
 }
+
+workspace_switcher.apply_to_config(config)
 
 -- and finally, return the configuration to wezterm
 return config

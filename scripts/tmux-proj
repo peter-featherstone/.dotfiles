@@ -1,0 +1,21 @@
+#!/bin/bash
+
+selected=$(find ~/Documents/Tails/git ~/Documents/Local/git -mindepth 1 -maxdepth 1 -type d | fzf)
+
+if [[ -z $selected ]] ; then
+    exit 0
+fi
+
+project=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $project -c $selected
+    exit 0
+fi
+
+if ! tmux has-session -t=$project 2> /dev/null; then
+    tmux new-session -ds $project -c $selected
+fi
+
+tmux switch-client -t $project
