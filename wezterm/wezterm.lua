@@ -20,6 +20,12 @@ config.window_decorations = "RESIZE"
 config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
+config.window_padding = {
+  left = 25,
+  right = 2,
+  top = -10,
+  bottom = 0,
+}
 config.window_frame = {
   active_titlebar_bg = '#24283c',
   inactive_titlebar_bg = '#24283c',
