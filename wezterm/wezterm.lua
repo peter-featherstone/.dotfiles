@@ -1,7 +1,7 @@
 -- ln -s /Users/peter/Documents/Local/git/.dotfiles/wezterm/wezterm.lua /Users/peter/.wezterm.lua
 
 -- Pull in the wezterm API
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
@@ -9,8 +9,8 @@ local config = wezterm.config_builder()
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
-config.color_scheme = 'Tokyo Night Storm'
-config.font = wezterm.font 'CaskaydiaCove NF'
+config.color_scheme = "Tokyo Night Storm"
+config.font = wezterm.font("CaskaydiaCove NF")
 config.max_fps = 120
 config.font_size = 16
 
@@ -21,30 +21,30 @@ config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = true
 config.show_new_tab_button_in_tab_bar = false
 config.window_padding = {
-  left = 25,
-  right = 2,
-  top = -10,
-  bottom = 0,
+	left = 25,
+	right = 2,
+	top = 20,
+	bottom = 0,
 }
 config.window_frame = {
-  active_titlebar_bg = '#24283c',
-  inactive_titlebar_bg = '#24283c',
+	active_titlebar_bg = "#24283c",
+	inactive_titlebar_bg = "#24283c",
 }
 
 config.colors = {
-  tab_bar = {
-    background = '#24283c',
-    inactive_tab_edge = '#24283c',
-    active_tab = {
-      bg_color = '#24283c',
-      fg_color = '#fff',
-    },
+	tab_bar = {
+		background = "#24283c",
+		inactive_tab_edge = "#24283c",
+		active_tab = {
+			bg_color = "#24283c",
+			fg_color = "#fff",
+		},
 
-    inactive_tab = {
-      bg_color = '#24283c',
-      fg_color = '#fff',
-    },
-  },
+		inactive_tab = {
+			bg_color = "#24283c",
+			fg_color = "#fff",
+		},
+	},
 }
 
 -- and finally, return the configuration to wezterm
