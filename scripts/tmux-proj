@@ -7,15 +7,20 @@ if [[ -z $selected ]] ; then
 fi
 
 project=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $project -c $selected
-    exit 0
-fi
+#tmux_running=$(pgrep tmux)
+
+#if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+
+#if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+  # tmux new-session -s $project -c $selected "nvim ."
+  # exit 0
+#fi
 
 if ! tmux has-session -t=$project 2> /dev/null; then
-    tmux new-session -ds $project -c $selected
+    tmux new -d -s $project -c $selected "nvim ."
+    tmux neww -d -t $project:2 -c $selected
+    tmux neww -d -t $project:3 -c $selected
 fi
 
 tmux switch-client -t $project

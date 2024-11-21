@@ -2,7 +2,6 @@
 
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
-local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
@@ -54,7 +53,7 @@ config.colors = {
 	},
 }
 
-workspace_switcher.apply_to_config(config)
+config.default_prog = { "/opt/homebrew/bin/tmux" }
 
 -- and finally, return the configuration to wezterm
 return config
