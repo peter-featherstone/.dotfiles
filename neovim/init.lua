@@ -29,6 +29,19 @@ vim.opt.scrolloff = 10
 -- Reserve a space in the gutter
 vim.opt.signcolumn = "yes"
 
+-- Navigate back to the filesystem at any point either to base or relative.
+vim.keymap.set("n", "-", "<cmd>execute 'Oil' getcwd()<CR>")
+vim.keymap.set("n", "*", "<cmd>Oil<CR>")
+
+-- Highlight when yanking (copying) text
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
+
 -- [[ Install `vim` plugin manager ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -194,12 +207,14 @@ require("lazy").setup({
 	-- Oil provides nice file management when opening vim in a folder.
 	{
 		"stevearc/oil.nvim",
+		dependencies = { "echasnovski/mini.icons" },
 		opts = {
+			watch_for_changes = true,
+			delete_to_trash = true,
 			view_options = {
 				show_hidden = true,
 			},
 		},
-		dependencies = { { "echasnovski/mini.icons", opts = {} } },
 	},
 	-- Treesitter adds nice colour highlight and formatting for programming languages
 	{
@@ -238,6 +253,7 @@ require("lazy").setup({
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
+			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "[F]ind by open [B]uffers" })
 		end,
 	},
 	-- Harpoon allows easier quick file switching within a project
