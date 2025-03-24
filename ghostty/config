@@ -1,0 +1,8 @@
+# ln -s /Users/peter/Documents/Local/git/.dotfiles/ghostty /Users/peter/.config/ghostty
+
+theme = catppuccin-mocha.conf
+shell-integration = zsh
+keybind = cmd+f=text:tmux-proj\r
+font-family = CaskaydiaCove NF
+font-size = 18
+font-thicken = true

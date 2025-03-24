@@ -2,6 +2,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.o.termguicolors = true
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -53,16 +55,13 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require("lazy").setup({
 	-- Add our base theme, this is our most important thing of course.
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
+	{ 
+		"catppuccin/nvim",
+		name = "catppuccin", 
 		priority = 1000,
-		init = function()
-			vim.cmd.colorscheme("tokyonight-storm")
-			vim.cmd.hi("Comment gui=none")
-		end,
+		flavour = "mocha",
 	},
-	-- Setup all our LSP stuff, this is extremely important.
+	-- Setup all our LSP stuff, this is extremely important. Not as important as theme though, obviously.
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -207,7 +206,7 @@ require("lazy").setup({
 	-- Oil provides nice file management when opening vim in a folder.
 	{
 		"stevearc/oil.nvim",
-		dependencies = { "echasnovski/mini.icons" },
+		dependencies = {{ "echasnovski/mini.icons", opts = {} }},
 		opts = {
 			watch_for_changes = true,
 			delete_to_trash = true,
@@ -289,3 +288,5 @@ require("lazy").setup({
 	-- Set tabs and spaces per file type automatically.
 	"tpope/vim-sleuth",
 })
+
+vim.cmd.colorscheme("catppuccin")

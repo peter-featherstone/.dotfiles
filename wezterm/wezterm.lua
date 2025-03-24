@@ -15,7 +15,7 @@ config.keys = {
 }
 
 -- For example, changing the color scheme:
-config.color_scheme = "Tokyo Night Storm"
+config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("CaskaydiaCove NF")
 config.max_fps = 120
 config.font_size = 16
