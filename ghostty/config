@@ -2,7 +2,21 @@
 
 theme = catppuccin-mocha.conf
 shell-integration = zsh
-keybind = cmd+f=text:tmux-proj\r
-font-family = CaskaydiaCove NF
+
+font-family = JetBrains Mono
 font-size = 18
 font-thicken = true
+title = " "
+working-directory = /Users/peter/Documents/Local/git
+window-padding-x = 0
+window-padding-y = 0
+window-decoration = false
+macos-window-shadow = false
+scrollback-limit = 1000000
+
+keybind = cmd+f=text:tmux-proj\r
+keybind = cmd+r=reload_config
+command=/Users/peter/Documents/Local/git/.dotfiles/ghostty/tmux.sh
+
+# Fix for tmux bindings to option key
+macos-option-as-alt=true

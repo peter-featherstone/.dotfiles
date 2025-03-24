@@ -13,7 +13,6 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#45475a \
 --color=border:#313244,label:#cdd6f4"
 
-eval "$(ssh-agent -s)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
@@ -27,10 +26,6 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
-
-bindkey -s ^N "tmux-proj\n"
-bindkey "^[[1;3C" forward-word
-bindkey "^[[1;3D" backward-word
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/peter/.docker/completions $fpath)

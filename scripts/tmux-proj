@@ -1,26 +1,26 @@
 #!/bin/bash
 
 selected=$(find ~/Documents/Tails/git ~/Documents/Local/git -mindepth 1 -maxdepth 1 -type d | fzf)
+SESSION_NAME=$(basename "$selected" | tr . _)
 
-if [[ -z $selected ]] ; then
-    exit 0
+if [ ! $selected ]; then
+  exit 0
 fi
 
-project=$(basename "$selected" | tr . _)
+# Check if the session already exists
+tmux has-session -t $SESSION_NAME 2>/dev/null
 
-#tmux_running=$(pgrep tmux)
-
-#if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-
-#if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-  # tmux new-session -s $project -c $selected "nvim ."
-  # exit 0
-#fi
-
-if ! tmux has-session -t=$project 2> /dev/null; then
-    tmux new -d -s $project -c $selected "nvim ."
-    tmux neww -d -t $project:2 -c $selected
-    tmux neww -d -t $project:3 -c $selected
+if [ $? -eq 0 ]; then
+  # If the session exists, reattach to it
+  tmux attach -t $SESSION_NAME
+else
+  # If the session doesn't exist, start a new one
+  tmux new -d -s $SESSION_NAME -c $selected "nvim ."
+  tmux neww -d -t $SESSION_NAME:2 -c $selected
+  tmux neww -d -t $SESSION_NAME:3 -c $selected
+  tmux neww -d -t $SESSION_NAME:4 -c $selected
+  tmux neww -d -t $SESSION_NAME:5 -c $selected
+  tmux attach -t $SESSION_NAME
 fi
 
-tmux switch-client -t $project
+tmux switch-client -t $SESSION_NAME
