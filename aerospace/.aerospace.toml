@@ -1,0 +1,61 @@
+ # ln -s /Users/peter/Documents/Local/git/.dotfiles/aerospace/.aerospace.toml /Users/peter/.aerospace.toml
+
+start-at-login = true
+after-startup-command = ['exec-and-forget sketchybar']
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = false
+
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+[mode.main.binding]
+cmd-1 = 'workspace 1'
+cmd-2 = 'workspace 2'
+cmd-3 = 'workspace 3'
+cmd-4 = 'workspace 4'
+cmd-5 = 'workspace 5'
+cmd-6 = 'workspace 6'
+cmd-7 = 'workspace 7'
+cmd-8 = 'workspace 8'
+cmd-9 = 'workspace 9'
+
+cmd-ctrl-1 = 'move-node-to-workspace 1'
+cmd-ctrl-2 = 'move-node-to-workspace 2'
+cmd-ctrl-3 = 'move-node-to-workspace 3'
+cmd-ctrl-4 = 'move-node-to-workspace 4'
+cmd-ctrl-5 = 'move-node-to-workspace 5'
+cmd-ctrl-6 = 'move-node-to-workspace 6'
+cmd-ctrl-7 = 'move-node-to-workspace 7'
+cmd-ctrl-8 = 'move-node-to-workspace 8'
+cmd-ctrl-9 = 'move-node-to-workspace 9'
+
+alt-t = 'layout floating tiling'
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = "move-node-to-workspace 1"
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = "move-node-to-workspace 4"
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = "move-node-to-workspace 5"
+
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+run = "move-node-to-workspace 6"

@@ -1,4 +1,4 @@
-  # ln -s /Users/peter/Documents/Local/git/.dotfiles/lsd /Users/peter/.config/lsd
+# ln -s /Users/peter/Documents/Local/git/.dotfiles/lsd /Users/peter/.config/lsd
 
-  color:
-    theme: custom
+color:
+  theme: custom
