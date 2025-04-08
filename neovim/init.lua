@@ -288,6 +288,24 @@ require("lazy").setup({
 	},
 	-- Set tabs and spaces per file type automatically.
 	"tpope/vim-sleuth",
+	-- Edit Obsidian notes in neovim
+	{
+		"epwalsh/obsidian.nvim",
+		version = "*",
+		lazy = true,
+		ft = "markdown",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		opts = {
+			workspaces = {
+				{
+					name = "personal",
+					path = "~/Library/CloudStorage/GoogleDrive-fe@therst.one/My Drive/Documents/Notes/Obsidian",
+				},
+			},
+		},
+	}
 })
 
 vim.cmd.colorscheme("catppuccin")

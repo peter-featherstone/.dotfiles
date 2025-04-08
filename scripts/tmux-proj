@@ -1,9 +1,9 @@
 #!/bin/bash
 
-selected=$(find ~/Documents/Tails/git ~/Documents/Local/git -mindepth 1 -maxdepth 1 -type d | fzf)
-SESSION_NAME=$(basename "$selected" | tr . _)
+selected=$(find ~/Documents/Tails/git ~/Documents/Local/git ~/Library/CloudStorage/GoogleDrive-fe@therst.one/My\ Drive/Documents/Notes -mindepth 1 -maxdepth 1 -type d | fzf)
+SESSION_NAME=$(basename "$selected" | tr . _ | awk '{print tolower($0)}')
 
-if [ ! $selected ]; then
+if [ ! $SESSION_NAME ]; then
   exit 0
 fi
 
@@ -15,12 +15,11 @@ if [ $? -eq 0 ]; then
   tmux attach -t $SESSION_NAME
 else
   # If the session doesn't exist, start a new one
-  tmux new -d -s $SESSION_NAME -c $selected "nvim ."
-  tmux neww -d -t $SESSION_NAME:2 -c $selected
-  tmux neww -d -t $SESSION_NAME:3 -c $selected
-  tmux neww -d -t $SESSION_NAME:4 -c $selected
-  tmux neww -d -t $SESSION_NAME:5 -c $selected
-  tmux attach -t $SESSION_NAME
+  tmux new -d -s $SESSION_NAME -c "$selected" "nvim ."
+  tmux neww -d -t $SESSION_NAME:2 -c "$selected"
+  tmux neww -d -t $SESSION_NAME:3 -c "$selected"
+  tmux neww -d -t $SESSION_NAME:4 -c "$selected"
+  tmux neww -d -t $SESSION_NAME:5 -c "$selected"
 fi
 
 tmux switch-client -t $SESSION_NAME

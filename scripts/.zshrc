@@ -14,7 +14,7 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#45475a \
 --color=border:#313244,label:#cdd6f4"
 
-eval "$(ssh-agent -s)"
+eval "$(ssh-agent -s)" > /dev/null
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
