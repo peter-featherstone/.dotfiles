@@ -13,6 +13,9 @@ enable-normalization-opposite-orientation-for-nested-containers = false
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
+[gaps]
+outer.top = [{ monitor.main = 0 }, { monitor.1 = 40 }, { monitor.2 = 40 }, 0]
+
 [mode.main.binding]
 alt-t = 'layout floating tiling'
 
@@ -26,7 +29,6 @@ cmd-6 = 'workspace 6'
 cmd-7 = 'workspace 7'
 cmd-8 = 'workspace 8'
 cmd-9 = 'workspace 9'
-cmd-0 = 'workspace 0'
 
 cmd-ctrl-1 = 'move-node-to-workspace 1'
 cmd-ctrl-2 = 'move-node-to-workspace 2'
@@ -38,8 +40,6 @@ cmd-ctrl-6 = 'move-node-to-workspace 6'
 cmd-ctrl-7 = 'move-node-to-workspace 7'
 cmd-ctrl-8 = 'move-node-to-workspace 8'
 cmd-ctrl-9 = 'move-node-to-workspace 9'
-cmd-ctrl-0 = 'move-node-to-workspace 0'
-
 
 [workspace-to-monitor-force-assignment]
 1 = 'main'
@@ -52,7 +52,6 @@ cmd-ctrl-0 = 'move-node-to-workspace 0'
 7 = 'secondary'
 8 = 'secondary'
 9 = 'secondary'
-0 = 'secondary'
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'

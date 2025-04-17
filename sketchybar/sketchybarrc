@@ -3,11 +3,11 @@
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
-sketchybar --bar position=top height=40 blur_radius=30 color=0xff1e1e2e
+sketchybar --bar position=top padding_left=5 padding_right=5 height=40 blur_radius=30 color=0xff1e1e2e
 
 default=(
   padding_left=0
-  padding_right=5
+  padding_right=0
   icon.font="Hack Nerd Font:Bold:17.0"
   label.font="Hack Nerd Font:Bold:14.0"
   icon.color=0xffffffff

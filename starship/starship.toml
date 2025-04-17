@@ -5,7 +5,8 @@
 palette = "catppuccin_mocha"
 
 # Inserts a blank line between shell prompts
-add_newline = true
+add_newline = false
+
 
 format = """
 [](green)\
@@ -18,6 +19,9 @@ $git_branch\
 $time\
 [ ](fg:mauve)\
 """
+
+[character]
+success_symbol = """\n$symbol"""
 
 [username]
 show_always = true
