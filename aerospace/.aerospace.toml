@@ -14,7 +14,7 @@ default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
 [gaps]
-outer.top = [{ monitor.main = 0 }, { monitor.1 = 40 }, { monitor.2 = 40 }, 0]
+outer.top = [{ monitor.1 = 40 }, { monitor.2 = 40 }, { monitor.main = 0 }, 0]
 
 [mode.main.binding]
 alt-t = 'layout floating tiling'
