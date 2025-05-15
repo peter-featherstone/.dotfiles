@@ -1,7 +1,6 @@
 alias vim="nvim"
 alias cat="bat"
 alias ls="lsd -la"
-alias f="fzf"
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
@@ -14,9 +13,7 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#45475a \
 --color=border:#313244,label:#cdd6f4"
 
-eval "$(ssh-agent -s)" > /dev/null
 eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -25,11 +22,5 @@ source <(fzf --zsh)
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 fi
-
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/peter/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
 
 eval $(thefuck --alias)

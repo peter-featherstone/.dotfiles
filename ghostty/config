@@ -10,7 +10,7 @@ font-style-italic = false
 font-style-bold-italic = false
 font-feature = -calt
 title = " "
-working-directory = /Users/peter/Documents/Local/git
+working-directory = /Users/peter/Documents/Local/git/personal
 window-padding-x = 0
 window-padding-y = 0
 window-padding-balance = true
@@ -18,7 +18,7 @@ window-decoration = false
 macos-window-shadow = false
 scrollback-limit = 1000000
 
-keybind = cmd+f=text:tmux-proj\r
+keybind = cmd+f=text:/Users/peter/Documents/Local/git/personal/.dotfiles/scripts/tmux-proj\r
 command=.dotfiles/ghostty/start.sh
 
 # Fix for tmux bindings to option key

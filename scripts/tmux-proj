@@ -1,6 +1,6 @@
 #!/bin/bash
 
-selected=$(find ~/Documents/Tails/git ~/Documents/Local/git ~/Library/CloudStorage/GoogleDrive-fe@therst.one/My\ Drive/Documents/Notes -mindepth 1 -maxdepth 1 -type d | fzf)
+selected=$(find ~/Documents/Local/git -mindepth 2 -maxdepth 2 -type d | fzf)
 SESSION_NAME=$(basename "$selected" | tr . _ | awk '{print tolower($0)}')
 
 if [ ! $SESSION_NAME ]; then
