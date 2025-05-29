@@ -70,7 +70,7 @@ if.app-id = 'com.tinyspeck.slackmacgap'
 run = "move-node-to-workspace 4"
 
 [[on-window-detected]]
-if.app-id = 'md.obsidian'
+if.app-id = 'io.beekeeperstudio.desktop'
 run = "move-node-to-workspace 5"
 
 [[on-window-detected]]
@@ -78,13 +78,5 @@ if.app-id = 'com.usebruno.app'
 run = "move-node-to-workspace 6"
 
 [[on-window-detected]]
-if.app-id = 'com.jetbrains.datagrip'
-run = "move-node-to-workspace 7"
-
-[[on-window-detected]]
-if.app-id = 'io.beekeeperstudio.desktop'
-run = "move-node-to-workspace 7"
-
-[[on-window-detected]]
 if.app-id = 'org.libreoffice.script'
-run = "move-node-to-workspace 8"
+run = "move-node-to-workspace 7"

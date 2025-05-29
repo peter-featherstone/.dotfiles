@@ -32,6 +32,10 @@ vim.opt.scrolloff = 10
 -- Reserve a space in the gutter
 vim.opt.signcolumn = "yes"
 
+-- Reduce indents
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+
 -- Navigate back to the filesystem at any point either to base or relative.
 vim.keymap.set("n", "-", "<cmd>execute 'Oil' getcwd()<CR>")
 vim.keymap.set("n", "*", "<cmd>Oil<CR>")
@@ -56,9 +60,9 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require("lazy").setup({
 	-- Add our base theme, this is our most important thing of course.
-	{ 
+	{
 		"catppuccin/nvim",
-		name = "catppuccin", 
+		name = "catppuccin",
 		priority = 1000,
 		flavour = "mocha",
 	},
@@ -82,6 +86,7 @@ require("lazy").setup({
 					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+					map("<leader>e", vim.diagnostic.open_float, "Show diagnostics")
 					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -118,6 +123,23 @@ require("lazy").setup({
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 			local servers = {
+				-- requires ruff
+				ruff = {},
+				-- pyright required for typehints but we want to stop it interfering with ruff
+				-- requires npm
+				pyright = {
+					settings = {
+						pyright = {
+							disableOrganizeImport = true,
+						},
+						python = {
+							analysis = {
+								ignore = { "*" },
+							},
+						},
+					},
+				},
+				-- requires cargo
 				rust_analyzer = {},
 				lua_ls = {
 					settings = {
@@ -131,12 +153,10 @@ require("lazy").setup({
 						},
 					},
 				},
+				stylua = {},
 			}
 			require("mason").setup()
 			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"stylua", -- Used to format Lua code
-			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 			require("mason-lspconfig").setup({
 				handlers = {
@@ -164,6 +184,8 @@ require("lazy").setup({
 				dependencies = {},
 			},
 			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
 		},
@@ -202,12 +224,21 @@ require("lazy").setup({
 					{ name = "path" },
 				},
 			})
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{ name = "cmdline" },
+				}),
+				matching = { disallow_symbol_nonprefix_matching = false },
+			})
 		end,
 	},
 	-- Oil provides nice file management when opening vim in a folder.
 	{
 		"stevearc/oil.nvim",
-		dependencies = {{ "echasnovski/mini.icons", opts = {} }},
+		dependencies = { { "echasnovski/mini.icons", opts = {} } },
 		opts = {
 			watch_for_changes = true,
 			delete_to_trash = true,
@@ -236,7 +267,7 @@ require("lazy").setup({
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				python = { "isort", "black" },
+				python = { "ruff_format", "ruff_fix" },
 				rust = { "rustfmt" },
 			},
 			format_on_save = {
@@ -288,24 +319,12 @@ require("lazy").setup({
 	},
 	-- Set tabs and spaces per file type automatically.
 	"tpope/vim-sleuth",
-	-- Edit Obsidian notes in neovim
 	{
-		"epwalsh/obsidian.nvim",
-		version = "*",
-		lazy = true,
-		ft = "markdown",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		opts = {
-			workspaces = {
-				{
-					name = "personal",
-					path = "~/Library/CloudStorage/GoogleDrive-fe@therst.one/My Drive/Documents/Notes/Obsidian",
-				},
-			},
-		},
-	}
+		"https://codeberg.org/esensar/nvim-dev-container",
+		config = function()
+			require("devcontainer").setup({})
+		end,
+	},
 })
 
 vim.cmd.colorscheme("catppuccin")
