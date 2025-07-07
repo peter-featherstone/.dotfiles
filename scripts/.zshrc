@@ -6,6 +6,7 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
@@ -24,3 +25,8 @@ if type brew &>/dev/null; then
 fi
 
 eval $(thefuck --alias)
+
+# Created by `pipx` on 2025-05-30 07:28:32
+export PATH="$PATH:/Users/peter/.local/bin"
+
+autoload -Uz compinit && compinit
