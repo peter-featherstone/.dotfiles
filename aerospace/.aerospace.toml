@@ -87,3 +87,7 @@ run = "move-node-to-workspace 7"
 [[on-window-detected]]
 if.app-id = 'com.apple.iphonesimulator'
 run = ['layout floating', 'move-node-to-workspace 3']
+
+[[on-window-detected]]
+if.app-id = 'com.cockos.LICEcap'
+run = ['layout floating', 'move-node-to-workspace 2']
