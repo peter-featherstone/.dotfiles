@@ -141,6 +141,7 @@ require("lazy").setup({
 				},
 				-- requires cargo
 				rust_analyzer = {},
+				zls = {},
 				lua_ls = {
 					settings = {
 						Lua = {
