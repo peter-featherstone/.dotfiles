@@ -43,9 +43,9 @@ cmd-ctrl-9 = 'move-node-to-workspace 9'
 [workspace-to-monitor-force-assignment]
 1 = 'main'
 2 = 'main'
-3 = 'secondary'
+3 = 'main'
 4 = 'secondary'
-5 = 'main'
+5 = 'secondary'
 
 6 = 'secondary'
 7 = 'secondary'
@@ -69,15 +69,11 @@ if.app-id = 'com.tinyspeck.slackmacgap'
 run = "move-node-to-workspace 4"
 
 [[on-window-detected]]
-if.app-id = 'com.jetbrains.datagrip'
+if.app-id = 'com.blackmagic-design.DaVinciResolve'
 run = "move-node-to-workspace 5"
 
 [[on-window-detected]]
-if.app-id = 'com.apple.dt.Xcode'
-run = "move-node-to-workspace 7"
-
-[[on-window-detected]]
-if.app-id = 'com.usebruno.app'
+if.app-id = 'com.usebruno.datagrip'
 run = "move-node-to-workspace 6"
 
 [[on-window-detected]]
