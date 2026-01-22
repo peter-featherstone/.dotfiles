@@ -73,11 +73,15 @@ if.app-id = 'com.blackmagic-design.DaVinciResolve'
 run = "move-node-to-workspace 5"
 
 [[on-window-detected]]
-if.app-id = 'com.usebruno.datagrip'
+if.app-id = 'com.usebruno.app'
 run = "move-node-to-workspace 6"
 
 [[on-window-detected]]
 if.app-id = 'org.libreoffice.script'
+run = "move-node-to-workspace 7"
+
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.datagrip'
 run = "move-node-to-workspace 7"
 
 [[on-window-detected]]
