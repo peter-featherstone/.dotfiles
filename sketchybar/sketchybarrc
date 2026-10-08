@@ -22,21 +22,28 @@ sketchybar --default "${default[@]}"
 ##### Adding Left Items #####
 sketchybar --add event aerospace_workspace_change
 
-for sid in $(aerospace list-workspaces --all); do
+# Workspace 0 sits after 9 on the keyboard, so show it last and label it 10
+for sid in $(aerospace list-workspaces --all | grep -v '^0$') 0; do
+    label=$([ "$sid" = "0" ] && echo 10 || echo "$sid")
+    width=$([ "$sid" = "0" ] && echo 24 || echo 17)
+
     sketchybar --add item space.$sid left \
-        --subscribe space.$sid aerospace_workspace_change \
         --set space.$sid \
         background.color=0xffa6e3a1 \
         background.corner_radius=5 \
         background.height=20 \
-        background.drawing=on \
-        label="$sid" \
-        label.width=17 \
+        background.drawing=off \
+        label="$label" \
+        label.width=$width \
         label.padding_left=0 \
         label.padding_right=0 \
-        click_script="aerospace workspace $sid" \
-        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+        click_script="aerospace workspace $sid"
 done
+
+# Hidden item that places every workspace on its monitor's bar and highlights them
+sketchybar --add item aerospace left \
+           --set aerospace drawing=off script="$PLUGIN_DIR/aerospace.sh" \
+           --subscribe aerospace aerospace_workspace_change display_change system_woke
 
 sketchybar --add item chevron left \
            --set chevron icon= label.drawing=off \
