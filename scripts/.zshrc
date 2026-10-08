@@ -2,6 +2,15 @@ alias vim="nvim"
 alias cat="bat"
 alias ls="lsd -la"
 
+# Override docker command to format 'docker ps' output
+docker() {
+  if [[ "$1" == "ps" ]] && [[ "$#" -eq 1 ]]; then
+    command docker ps --format "table {{.Names}}\t{{.Status}}"
+  else
+    command docker "$@"
+  fi
+}
+
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools

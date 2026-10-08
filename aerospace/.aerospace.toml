@@ -41,22 +41,22 @@ cmd-ctrl-9 = ['move-node-to-workspace 9', 'workspace 9']
 
 [workspace-to-monitor-force-assignment]
 1 = 1
-2 = 1
+2 = 2
 3 = 2
-4 = 'built-in'
+4 = 2
 5 = 1
 6 = 2
-7 = 'built-in'
+7 = 2
 8 = 1
 9 = 2
-0 = 'built-in'
+0 = 2
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
 run = "move-node-to-workspace 1"
 
 [[on-window-detected]]
-if.app-id = 'company.thebrowser.Browser'
+if.app-id = 'company.thebrowser.dia'
 run = "move-node-to-workspace 2"
 
 [[on-window-detected]]
@@ -68,20 +68,12 @@ if.app-id = 'com.tinyspeck.slackmacgap'
 run = "move-node-to-workspace 4"
 
 [[on-window-detected]]
-if.app-id = 'com.blackmagic-design.DaVinciResolve'
-run = "move-node-to-workspace 5"
-
-[[on-window-detected]]
-if.app-id = 'com.usebruno.app'
+if.app-id = 'company.thebrowser.Browser'
 run = "move-node-to-workspace 6"
 
 [[on-window-detected]]
 if.app-id = 'org.libreoffice.script'
 run = "move-node-to-workspace 7"
-
-[[on-window-detected]]
-if.app-id = 'com.jetbrains.datagrip'
-run = "move-node-to-workspace 8"
 
 [[on-window-detected]]
 if.app-id = 'com.apple.iphonesimulator'
