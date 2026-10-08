@@ -1,4 +1,4 @@
-# ln -s /Users/peter/Documents/Local/git/.dotfiles/sketchybar /Users/peter/.config/sketchybar
+# ln -s /Users/peter/Documents/Local/git/personal/.dotfiles/sketchybar /Users/peter/.config/sketchybar
 # brew install --cask font-hack-nerd-font
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"

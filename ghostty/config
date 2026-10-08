@@ -1,4 +1,4 @@
-# ln -s /Users/peter/Documents/Local/git/.dotfiles/ghostty /Users/peter/.config/ghostty
+# ln -s /Users/peter/Documents/Local/git/personal/.dotfiles/ghostty /Users/peter/.config/ghostty
 
 theme = catppuccin-mocha.conf
 shell-integration = zsh
@@ -19,7 +19,7 @@ macos-window-shadow = false
 scrollback-limit = 1000000
 
 keybind = cmd+f=text:/Users/peter/Documents/Local/git/personal/.dotfiles/scripts/tmux-proj\r
-command=.dotfiles/ghostty/start.sh
+command=/Users/peter/Documents/Local/git/personal/.dotfiles/ghostty/start.sh
 
 # Fix for tmux bindings to option key
 macos-option-as-alt=true

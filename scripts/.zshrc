@@ -1,3 +1,5 @@
+# ln -s /Users/peter/Documents/Local/git/personal/.dotfiles/scripts/.zshrc /Users/peter/.zshrc
+
 alias vim="nvim"
 alias cat="bat"
 alias ls="lsd -la"

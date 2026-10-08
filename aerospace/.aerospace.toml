@@ -1,4 +1,4 @@
- # ln -s /Users/peter/Documents/Local/git/.dotfiles/aerospace/.aerospace.toml /Users/peter/.aerospace.toml
+ # ln -s /Users/peter/Documents/Local/git/personal/.dotfiles/aerospace/.aerospace.toml /Users/peter/.aerospace.toml
 
 start-at-login = true
 after-startup-command = ['exec-and-forget sketchybar']

@@ -1,3 +1,5 @@
+-- ln -s /Users/peter/Documents/Local/git/personal/.dotfiles/neovim/init.lua /Users/peter/.config/nvim/init.lua
+
 -- Set <space> as the leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
