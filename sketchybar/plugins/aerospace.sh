@@ -8,7 +8,7 @@
 # AeroSpace and SketchyBar number monitors differently, so map them via the
 # NSScreen index, which matches SketchyBar's display arrangement-id.
 
-FOCUSED="${FOCUSED_WORKSPACE:-$(aerospace list-workspaces --focused)}"
+FOCUSED="${FOCUSED_WORKSPACE:-$(aerospace list-workspaces --focused </dev/null)}"
 args=()
 
 while IFS='|' read -r monitor display; do

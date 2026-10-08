@@ -1,5 +1,6 @@
 # ln -s /Users/peter/Documents/Local/git/personal/.dotfiles/sketchybar /Users/peter/.config/sketchybar
 # brew install --cask font-hack-nerd-font
+# brew install ical-buddy media-control
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
@@ -46,20 +47,35 @@ sketchybar --add item aerospace left \
            --subscribe aerospace aerospace_workspace_change display_change system_woke
 
 sketchybar --add item chevron left \
-           --set chevron icon= label.drawing=off \
+           --set chevron icon= label.drawing=off \
            --add item front_app left \
            --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched
 
 ##### Adding Right Items #####
+# Calendar and media each get a "|" to their right, shown only while they are
+separator=(drawing=off icon.drawing=off label="|" label.color=0xff6c7086 label.padding_left=8 label.padding_right=8)
+
 sketchybar --add item clock right \
-           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
+           --set clock update_freq=10 icon= script="$PLUGIN_DIR/clock.sh" \
            --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
            --subscribe volume volume_change \
            --add item battery right \
            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-           --subscribe battery system_woke power_source_change
+           --subscribe battery system_woke power_source_change \
+           --add item calendar_sep right \
+           --set calendar_sep "${separator[@]}" \
+           --add item calendar right \
+           --set calendar update_freq=15 icon=󰃭 drawing=off \
+                          script="$PLUGIN_DIR/calendar.sh" click_script="open -a Calendar" \
+           --subscribe calendar system_woke \
+           --add item media_sep right \
+           --set media_sep "${separator[@]}" \
+           --add item media right \
+           --set media update_freq=5 drawing=off label.max_chars=40 \
+                       script="$PLUGIN_DIR/media.sh" click_script="media-control toggle-play-pause" \
+           --subscribe media system_woke
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
