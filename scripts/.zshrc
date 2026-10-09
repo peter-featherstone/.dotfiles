@@ -27,6 +27,11 @@ export FZF_DEFAULT_OPTS=" \
 
 eval "$(starship init zsh)"
 
+# Starship keeps the last command's duration in a shell variable; export it so the
+# custom.duration prompt module (see starship.toml) can format it
+_export_starship_duration() { export STARSHIP_DURATION }
+precmd_functions+=(_export_starship_duration)
+
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source <(fzf --zsh)

@@ -18,6 +18,7 @@ $git_branch\
 [](fg:peach bg:mauve)\
 $time\
 [ ](fg:mauve)\
+${custom.duration}\
 """
 
 [character]
@@ -34,6 +35,21 @@ disabled = false
 time_format = "%R" # Hour:Minute Format
 style = "bg:mauve fg:black"
 format = '[ $time ]($style)'
+
+# How long the last command took: "took 450ms", "took 12s", "took 2m5s".
+# Built-in cmd_duration can't switch units, so format STARSHIP_DURATION (ms)
+# ourselves; .zshrc exports it, as starship only keeps it as a shell variable.
+[custom.duration]
+when = 'test -n "$STARSHIP_DURATION"'
+command = '''
+ms=$STARSHIP_DURATION
+if [ "$ms" -lt 1000 ]; then echo "${ms}ms"
+elif [ "$ms" -lt 60000 ]; then echo "$((ms / 1000))s"
+else echo "$((ms / 60000))m$((ms % 60000 / 1000))s"; fi
+'''
+shell = ["sh"]
+style = "fg:overlay1"
+format = '[took $output ]($style)'
 
 [directory]
 style = "bg:blue fg:black"
