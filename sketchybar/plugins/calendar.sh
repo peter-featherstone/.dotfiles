@@ -48,6 +48,7 @@ COLOR=0xffffffff
 
 if [ "$SECONDS_LEFT" -le 0 ]; then
   WHEN="now"
+  COLOR=0xffa6e3a1
 elif [ "$MINUTES" -le 60 ]; then
   WHEN="in ${MINUTES}m"
   [ "$MINUTES" -le 1 ] && COLOR=0xfff38ba8
