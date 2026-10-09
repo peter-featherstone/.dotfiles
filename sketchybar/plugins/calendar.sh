@@ -1,16 +1,38 @@
 #!/bin/bash
 
 # Shows the next timed work meeting today, e.g. "Standup in 12m" or "Standup 14:30".
+# Only events with a Meet/Zoom/Teams link count, which skips holidays and placeholders.
+# Clicking it joins the meeting (see join_meeting.sh).
 # Needs Calendar access: System Settings > Privacy & Security > Calendars.
 # List calendar names with: icalBuddy calendars
 
-WORK_CALENDAR="peter@tails.com"
+# WORK_CALENDAR is set in local.sh (gitignored, see local.example.sh)
+[ -f "$CONFIG_DIR/local.sh" ] && source "$CONFIG_DIR/local.sh"
+CALENDARS=()
+[ -n "$WORK_CALENDAR" ] && CALENDARS=(-ic "$WORK_CALENDAR")
 
-EVENT="$(icalBuddy -ic "$WORK_CALENDAR" -n -nc -nrd -ea -eed -b '' -li 1 -iep title,datetime \
-  -po title,datetime -ps '| @ |' -tf '%H:%M' -df '' eventsToday 2>/dev/null | head -1)"
+LINK_PATTERN='https://(meet\.google\.com|[a-z0-9.-]*zoom\.us|teams\.microsoft\.com)/[^ <>"]+'
 
-START="$(printf '%s' "$EVENT" | grep -Eo '[0-9]{2}:[0-9]{2}' | head -1)"
-TITLE="${EVENT%% @ *}"
+# One block per event, each starting with "###", in start time order
+EVENTS="$(icalBuddy "${CALENDARS[@]}" -n -nc -nrd -ea -eed -b '###' \
+  -iep title,datetime,url,location,notes -po title,datetime,url,location,notes \
+  -ps '| @ |' -tf '%H:%M' -df '' "${CALENDAR_RANGE:-eventsToday}" 2>/dev/null)"
+
+# Take the first event that has a meeting link
+TITLE="" START="" LINK=""
+while IFS= read -r -d $'\x1e' block; do
+  link="$(printf '%s' "$block" | grep -Eo "$LINK_PATTERN" | head -1)"
+  [ -z "$link" ] && continue
+
+  first_line="$(printf '%s' "$block" | head -1)"
+  TITLE="${first_line%% @ *}"
+  START="$(printf '%s' "${first_line#* @ }" | grep -Eo '[0-9]{2}:[0-9]{2}' | head -1)"
+  LINK="$link"
+  break
+done < <(printf '%s\n' "$EVENTS" | awk 'NR > 1 && /^###/ { printf "\036" } { sub(/^###/, ""); print } END { printf "\036" }')
+
+# Saved for join_meeting.sh to open on click
+printf '%s' "$LINK" > "${TMPDIR:-/tmp}/sketchybar_meeting_url"
 
 if [ -z "$START" ] || [ -z "$TITLE" ]; then
   sketchybar --set "$NAME" drawing=off --set "${NAME}_sep" drawing=off

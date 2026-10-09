@@ -41,34 +41,41 @@ for sid in $(aerospace list-workspaces --all | grep -v '^0$') 0; do
         click_script="aerospace workspace $sid"
 done
 
-# Hidden item that places every workspace on its monitor's bar and highlights them
+sketchybar --add item chevron left \
+           --set chevron icon= label.drawing=off
+
+# One app name per monitor (front_app.<display>), filled in by aerospace.sh
+for display in $(aerospace list-monitors --format '%{monitor-appkit-nsscreen-screens-id}'); do
+    sketchybar --add item front_app.$display left \
+               --set front_app.$display display=$display icon.drawing=off
+done
+
+# Hidden item that places every workspace on its monitor's bar, highlights them and
+# names the app on each monitor. Re-runs on app switches and windows opening/closing.
 sketchybar --add item aerospace left \
            --set aerospace drawing=off script="$PLUGIN_DIR/aerospace.sh" \
-           --subscribe aerospace aerospace_workspace_change display_change system_woke
-
-sketchybar --add item chevron left \
-           --set chevron icon= label.drawing=off \
-           --add item front_app left \
-           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
-           --subscribe front_app front_app_switched
+           --subscribe aerospace aerospace_workspace_change front_app_switched \
+                                 space_windows_change display_change system_woke
 
 ##### Adding Right Items #####
-# Calendar and media each get a "|" to their right, shown only while they are
-separator=(drawing=off icon.drawing=off label="|" label.color=0xff6c7086 label.padding_left=8 label.padding_right=8)
+# Dividers between right items; calendar and media only show theirs while visible
+# SketchyBar sizes "|" by its ink but draws it with the glyph's left bearing (~3px),
+# so pad less on the left and more on the right to centre it between items
+separator=(drawing=off icon.drawing=off icon.padding_left=0 icon.padding_right=0 label="|" label.color=0xff6c7086
+           label.padding_left=5 label.padding_right=11)
 
 sketchybar --add item clock right \
-           --set clock update_freq=10 icon= script="$PLUGIN_DIR/clock.sh" \
-           --add item volume right \
-           --set volume script="$PLUGIN_DIR/volume.sh" \
-           --subscribe volume volume_change \
+           --set clock update_freq=10 icon.drawing=off script="$PLUGIN_DIR/clock.sh" \
+           --add item clock_sep right \
+           --set clock_sep "${separator[@]}" drawing=on \
            --add item battery right \
-           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+           --set battery update_freq=120 icon.drawing=off script="$PLUGIN_DIR/battery.sh" \
            --subscribe battery system_woke power_source_change \
            --add item calendar_sep right \
            --set calendar_sep "${separator[@]}" \
            --add item calendar right \
            --set calendar update_freq=15 icon=󰃭 drawing=off \
-                          script="$PLUGIN_DIR/calendar.sh" click_script="open -a Calendar" \
+                          script="$PLUGIN_DIR/calendar.sh" click_script="$PLUGIN_DIR/join_meeting.sh" \
            --subscribe calendar system_woke \
            --add item media_sep right \
            --set media_sep "${separator[@]}" \
