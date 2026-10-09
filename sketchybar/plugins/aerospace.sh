@@ -5,6 +5,7 @@
 
 # Pins each workspace item to the bar of the monitor it lives on, then highlights
 # the visible workspace on every monitor (green when focused, grey otherwise).
+# Workspaces with no windows get a dimmed number.
 # Also names the app on each monitor: the focused app on the focused monitor, and
 # whatever is open on the visible workspace of the others.
 # AeroSpace and SketchyBar number monitors differently, so map them via the
@@ -16,14 +17,17 @@ args=()
 
 while IFS='|' read -r monitor display; do
     visible=$(aerospace list-workspaces --monitor "$monitor" --visible </dev/null)
+    occupied=" $(aerospace list-workspaces --monitor "$monitor" --empty no </dev/null | tr '\n' ' ') "
 
     for sid in $(aerospace list-workspaces --monitor "$monitor" </dev/null); do
+        label_color=$([[ "$occupied" == *" $sid "* ]] && echo 0xffffffff || echo 0xff6c7086)
+
         if [ "$sid" = "$FOCUSED" ]; then
             style=(background.drawing=on background.color=0xffa6e3a1 label.color=0xff000000)
         elif [ "$sid" = "$visible" ]; then
-            style=(background.drawing=on background.color=0xff585b70 label.color=0xffffffff)
+            style=(background.drawing=on background.color=0xff585b70 label.color=$label_color)
         else
-            style=(background.drawing=off label.color=0xffffffff)
+            style=(background.drawing=off label.color=$label_color)
         fi
 
         args+=(--set "space.$sid" display="$display" "${style[@]}")
